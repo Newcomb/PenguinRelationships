@@ -7,8 +7,8 @@ dataP.then(function(data){
 var makePlot = function(data){
 
   var quiz = data.map(function(d,i){return data[i].quizes.map(function(h){return h.grade})})
-  var penArray=["Bookworm","Crafty","Cyclist","Drunken","Easter","EBook","Farmer","Gentleman","Judo","Moana","Painter","Grill","Pharoh","Pilot","Pinga","Pixie","Sailor","Santa","Tauch","Tux","ValentineO","Valentine","Wizard"]
 
+var pics = data.map(function(d,i){return data[i].picture})
   var corArray = []
   quiz.forEach(function(dq,iq){
     corArray.push(data.map(function(d,i){
@@ -43,9 +43,31 @@ var yScale = d3.scaleLinear()
 
 var plot = svg.append('g')
                 .attr('width',width)
-                .attr('hieght',height)
+                .attr('hieght',height);
 
+svg.selectAll('image')
+    .data(pics)
+    .enter()
+    .append('image')
+    .attr("xlink:href", function(d,i){return d})
+    .attr('x', xScale(.01))
+    .attr('y', function(d,i){return yScale(i)-5})
+    .attr('width',40)
+    .attr('height',35)
+    .on('mouseover', function(d,i){console.log('a'+i);console.log(d3.select("#a"+i).attr('id'));
+  if (d3.select("#a"+i).attr('id') == 'a'+i){data.forEach(function(da,ia){if (d3.select("#a"+i).attr('id') != 'a'+ia)
+    svg.selectAll("#a"+ia).classed("hidden",true)})}})
+    .on('mouseout',function(d,i){data.forEach(function(db,ib){svg.selectAll("#a"+ib).classed("hidden",false)})});;
 
+svg.selectAll('image1')
+    .data(pics)
+    .enter()
+    .append('image')
+    .attr("xlink:href", function(d,i){return d})
+    .attr('y', yScale(-1.5))
+    .attr('x', function(d,i){return xScale(i)+45})
+    .attr('width',40)
+    .attr('height',35)
 
 
 console.log(corArray)
@@ -61,7 +83,28 @@ corArray.forEach(function(d,i){
       .attr('width',function(){return 690/corArray[0].length})
       .attr('fill', function(dc,ic){return d3.interpolateOranges(dc)})
 
+var colors = [0,.2,.4,.6,.8,1]
 
+
+var legendL = svg.selectAll('rectC2')
+              .data(colors)
+              .enter()
+              .append('rect')
+              .attr('x', function(d,i){return 745})
+              .attr('y',function(d,i){return yScale(i+8)})
+              .attr('fill',function(d,i){return d3.interpolateOranges((d))})
+              .attr('height',20)
+              .attr('width',20);
+              colors.forEach(function(db,ib){
+                plot.append('text')
+                    .attr('x', function(){return 783})
+                    .attr('y',function(){return yScale(ib+7.5)})
+                    .attr('text-anchor','middle')
+                    .attr('font-size','16px')
+                    .attr('fill','black')
+                    .attr('pointer-events','none')
+                    .text(function(){return db})
+              })
 
 })
 }

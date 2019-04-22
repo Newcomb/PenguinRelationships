@@ -1,0 +1,7 @@
+.hidden{
+  opacity: 0;
+}
+div{
+  font-size: 20px;
+  width: 25%;
+  float: right;
