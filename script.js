@@ -82,6 +82,25 @@ corArray.forEach(function(d,i){
       .attr('height',function(){return 590/23})
       .attr('width',function(){return 690/corArray[0].length})
       .attr('fill', function(dc,ic){return d3.interpolateOranges(dc)})
+      .on('mouseover',function(dm,im){
+        plot.append('text')
+      .attr('id','tooltip')
+      .attr('x', function(dt,it){return 40 + 690/corArray[0].length + xScale(im)})
+      .attr('y',function(){return yScale(i)+20})
+      .attr('text-anchor','middle')
+      .attr('font-size','16px')
+      .attr('fill',function(){if (dm > .9){return 'white'}
+                              else{return'black'}})
+      .attr('pointer-events','none')
+      // .text(function(){if (dm > .9){return "Excellent: "+Math.round(100*dm)+'%'}
+      //                   if (dm >= .7){return "Acceptable: "+Math.round(100*dm)+'%'}
+      //                   else{return "Needs Help: " + Math.round(100*dm)+'%'}
+      .text(dm.toFixed(2))
+})
+.on('mouseout',function(d){
+  d3.select('#tooltip')
+    .remove();
+})
 
 var colors = [0,.2,.4,.6,.8,1]
 
