@@ -6,5 +6,44 @@
   </head>
   <body>
       <h1>Common Mistakes: Maps</h1>
+      <h3>Choosing the Map</h3>
+      <p>Not all maps are created equal. Conformal maps strive
+      to preserve the shape of the land while throwing off
+    the ratios of some of the land it is portraying. The
+  land nearest to the center of the map is closest to
+its actual size while the farther you get from the midline the
+larger the ratio grows. Equal-Area projections strive
+to preserve area ratios but end up distorting the shape of the land.
+A common mistake is using the wrong map depending on your purpose.
+If you wished to give an accurate representation for the size
+of a change (something like ice, fire, etc) it would be illogical to
+use a conformal projection because it would make it appear that
+the difference is higher or lower than it actually is. On the other hand,
+using an equal-area projection to try and display exact locations
+would return you a point that might not necessarily be accurate. </p>
+      <h3>Sizing Symbols Improperly</h3>
+      <p>Another mistake people tend to make when applying
+      data to their maps is the sizing of their data points.
+  It is easy to think that multiplying a circle by 200% will
+double its size, however, Cairo illustrates that by multiplying
+by 200% you are actually quadruplying the size of a circle
+because when the diameter doubles the area quadruples. By making this mistake,
+you are protraying incorrect size ratios for your data and could mislead your audience.
+In order to fix this problem you can use the formula below.</p>
+<br>
+<p>R2 = SqrRt(New value/Largest value * R1</p>
+      <h3>Misplacing Symbols</h3>
+      <p>To make a good map visualization you have to know
+      where to place your datapoints. Cairo makes it clear
+    that "each symbol should be located where each value was observed."
+  This rule keeps viewers from becoming confused about
+the location of the event of data because near but not
+exactly on the right spot. Cairo also gives guidelines for the
+placement of differing types of data. If the data represents
+a large area it should be placed in the center of that area
+while if it represents a single place it should be placed
+directly on that space. However, if clarity becomes an issue because
+too much overlap occurs it is acceptable to slightly
+displace your symbols in order to portray clearer data.</p>
   </body>
 </html>
